@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked Lists</title>
+    <link rel="stylesheet" href="styles19.css">
+  </head>
+  <body>
+
+<script>
+
+/*const linkedList = {
+    head: {
+        value: 1,
+        next: {
+            value: 2,
+            next: {
+                value: 3,
+                next: {
+                    value: 4,
+                    next: null
+                }
+            }
+        }
+    }
+}*/
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.nextNode = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  append(value) {
+    const newNode = new Node(value);
+
+    if (!this.head) {
+      this.head = newNode;
+    } else {
+      let current = this.head;
+
+      while (current.nextNode) {
+        current = current.nextNode;
+      }
+
+      current.nextNode = newNode;
+    }
+  }
+
+  prepend(value) {
+    const newNode = new Node(value);
+
+    newNode.nextNode = this.head;
+    this.head = newNode;
+  }
+
+  size() {
+    let count = 0;
+    let current = this.head;
+
+    while (current !== null) {
+      count++;
+      current = current.nextNode;
+    }
+
+    return count;
+  }
+
+first() {
+    if (this.head !== null) {
+        let current = this.head
+       return current
+    } else {
+        return undefined
+    }
+}
+
+last() {
+   let current = this.head;
+   while (current.nextNode !== null) {
+    current = current.nextNode
+   }
+   return current
+}
+
+at(index) {
+    let count = 0;
+    let current = this.head
+    while (count < index) {
+     count += 1
+     current = current.nextNode
+
+    }
+    return current
+}
+
+pop() {
+
+    if (this.head !== null) {
+    let head = this.head
+     
+     this.head = head.nextNode
+     return head
+    } else {
+        return undefined
+    }
+}
+
+
+contains(value) {
+
+
+/*if (current.value == value) {
+    return true
+} else if (current.nextNode == null) {
+    return false   
+} else {
+    list.contains(current.nextNode)
+}    recursive solution that would have worked perfectly if current wasn't reasigned to this.head every time the function ran. I couldn't figure out how to fix that bug*/
+let current = this.head
+while (current !== null) {
+    if (current.value == value) {
+        return true
+    }
+    current = current.nextNode
+}
+return false;
+
+}
+
+findIndex(value) {
+let current = this.head
+let count = 0;
+
+
+while (current.value !== null)  {
+  if (current.value == value) {
+  return count
+  }
+  current = current.nextNode;
+  count++;
+
+}
+
+
+}
+
+toString() {
+  let current = this.head;
+let string = ""
+let string2 = " -> "
+
+
+  while (current !== null) {
+    string += "( " + current.value + " )" + string2
+    current = current.nextNode
+  }
+
+  return string
+
+} 
+
+removeAt(index) {
+
+let count = 0;
+let current = this.head
+    while (count < index) {
+     count += 1
+     current = current.nextNode
+
+    }
+
+let curr = this.head;
+    while (curr.nextNode && curr.nextNode.value !== current.value) {
+        curr = curr.nextNode;
+    }
+
+    if (curr.nextNode) {
+        // Point the current node to the one AFTER the target node
+        curr.nextNode = curr.nextNode.nextNode;
+    }
+
+
+}
+
+}
+
+
+
+const list = new LinkedList();
+
+list.append("dog");
+list.append("giraffe");
+list.append("cat");
+list.append("mouse");
+list.append("sloth")
+list.append("rabbit")
+
+console.log(list.removeAt(5))
+console.log(list);
+
+
+</script>
+
+  </body>
